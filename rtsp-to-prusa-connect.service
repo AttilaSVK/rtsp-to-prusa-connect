@@ -1,0 +1,25 @@
+[Unit]
+Description=RTSP to Prusa Connect snapshot uploader
+Documentation=https://github.com/YOUR_USER/rtsp-to-prusa-connect
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+# All settings (token, RTSP URL, interval, ...) live here:
+EnvironmentFile=/etc/rtsp-to-prusa-connect.conf
+ExecStart=/usr/local/bin/rtsp-to-prusa-connect.sh
+Restart=always
+RestartSec=10
+# Be gentle on a small SBC like a Pi Zero.
+Nice=10
+
+# Light hardening (optional, safe for this simple uploader).
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+# tmpfs snapshot lives in /dev/shm, which stays writable under the above.
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,38 @@
+# rtsp-to-prusa-connect configuration
+#
+# Copy this file to /etc/rtsp-to-prusa-connect.conf and fill in your values.
+# It is read by the systemd service as an EnvironmentFile.
+# Keep the real file private (it contains your Prusa Connect token).
+
+# Full RTSP URL of your camera stream.
+RTSP_URL=rtsp://192.168.1.50:554/stream0
+
+# Prusa Connect camera token:
+# Connect -> your printer -> Camera -> add a new "Other" camera -> copy Token.
+PRUSA_TOKEN=your_prusa_connect_token_here
+
+# Stable, client-chosen unique ID (NOT a secret, NOT the display name).
+# >= 16 characters, alphanumeric, no spaces. Keep it constant forever --
+# changing it makes Prusa Connect show a brand new camera.
+FINGERPRINT=changeme0123456789abcdef
+
+# Display name shown in Prusa Connect (pushed via PUT /c/info at startup).
+CAMERA_NAME=RTSP Camera
+
+# Seconds between snapshots (real cadence ~= this + capture/upload time).
+INTERVAL=20
+
+# --- Optional / advanced ---
+
+# Temporary JPEG location. Default is RAM (tmpfs) to spare the SD card.
+#SNAPSHOT_PATH=/dev/shm/prusa_snapshot.jpg
+
+# RTSP transport: tcp (default, reliable) or udp.
+#RTSP_TRANSPORT=tcp
+
+# If your ffmpeg build rejects "-timeout" for RTSP, switch to "-stimeout".
+#FFMPEG_TIMEOUT_OPT=-timeout
+#FFMPEG_TIMEOUT_US=5000000
+
+# Prusa Connect camera API base URL (rarely needs changing).
+#PRUSA_HOST=https://webcam.connect.prusa3d.com

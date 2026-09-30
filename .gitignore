@@ -1,0 +1,8 @@
+# Never commit the real config (contains your Prusa Connect token)
+rtsp-to-prusa-connect.conf
+*.conf
+!*.conf.example
+
+# Snapshots / scratch
+*.jpg
+*.jpeg
